@@ -1,16 +1,23 @@
 const fetch = require('node-fetch');
 
-class EthPriceService {
-  static async getEthPriceInUSD() {
+const COINGECKO_API_URL = 'https://api.coingecko.com/api/v3/simple/price';
+
+async function fetchEthPrice() {
     try {
-      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd');
-      const data = await response.json();
-      return data.ethereum.usd;
+        const response = await fetch(`${COINGECKO_API_URL}?ids=ethereum&vs_currencies=usd`);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch ETH price');
+        }
+
+        const data = await response.json();
+        return data.ethereum.usd;
     } catch (error) {
-      console.error('Error fetching ETH price:', error);
-      throw new Error('Unable to fetch ETH price');
+        console.error('Error fetching ETH price:', error.message);
+        throw error;
     }
-  }
 }
 
-module.exports = EthPriceService;
+module.exports = {
+    fetchEthPrice
+};

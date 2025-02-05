@@ -1,8 +1,8 @@
 const express = require('express');
-const EthPriceController = require('../controllers/ethPriceController');
+const { getEthPrice } = require('../controllers/ethPriceController');
 
 const router = express.Router();
 
-router.get('/ethprice', EthPriceController.getEthPrice);
+router.get('/ethprice', getEthPrice);
 
 module.exports = router;
