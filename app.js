@@ -1,11 +1,13 @@
 const express = require('express');
-const app = express();
-const port = 3000;
+const ethPriceRoutes = require('./src/routes/ethPriceRoutes');
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+const app = express();
+const port = process.env.PORT || 3000;
+
+app.use('/api', ethPriceRoutes);
 
 app.listen(port, () => {
-  console.log(`Listening on http://localhost:${port}`);
-}); 
+  console.log(`Server running on port ${port}`);
+});
+
+module.exports = app;

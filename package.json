@@ -1,12 +1,18 @@
 {
   "name": "express-hello-world",
   "version": "1.0.0",
-  "description": "一个简单的 Express Hello World 应用",
+  "description": "Express application with ETH price endpoint",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.1"
+  },
+  "devDependencies": {
+    "jest": "^27.0.0",
+    "supertest": "^6.1.6"
   }
-} 
+}
