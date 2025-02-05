@@ -1,20 +1,14 @@
-const { fetchEthPrice } = require('../services/ethPriceService');
+const EthPriceService = require('../services/ethPriceService');
 
-async function getEthPrice(req, res) {
+class EthPriceController {
+  static async getEthPrice(req, res) {
     try {
-        const price = await fetchEthPrice();
-        res.json({ 
-            currency: 'USD', 
-            price: price 
-        });
+      const ethPrice = await EthPriceService.getEthPrice();
+      res.json({ price: ethPrice });
     } catch (error) {
-        res.status(500).json({ 
-            error: 'Unable to fetch ETH price', 
-            details: error.message 
-        });
+      res.status(500).json({ error: error.message });
     }
+  }
 }
 
-module.exports = {
-    getEthPrice
-};
+module.exports = EthPriceController;
